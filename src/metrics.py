@@ -3,6 +3,7 @@ from typing import List
 
 
 def accuracy(true_classes: List[str], predicted_classes: List) -> float:
+    print(true_classes, predicted_classes)
     q_vet = len(predicted_classes)
     acertos = 0
     for i in range (q_vet):

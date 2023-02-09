@@ -21,7 +21,7 @@ class Experiment:
         metrics = {
             "accuracy": accuracy(self.true_classes, pred_classes)
         }
-
+        print(metrics)
         return metrics
 
     def _get_true_classes_from_dataset(self, dataset: DatasetInterface) -> List[str]:

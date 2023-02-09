@@ -16,18 +16,6 @@ class NearestCentroidClassifier(ClassifierInterface):
             if classe not in self.dict_class.keys():            #se a classe ainda não for uma chave do dicionario,...
                 self.dict_class[classe] = []                    #...cria a chave
             self.dict_class[classe].append(amostra)             #vai dando append das amostras 
-
-        # self.dict_centroides = {}                               #dicionario que armazena o centroide de cada classe
-        # for key in self.dict_class.keys():                      #para cada chave em dict class
-        #     self.dict_centroides[key] = []                      #copia a chave para dict centroide
-        #     #for i in range(len(self.dict_class[key][0])):       #cada chave tem a ela associada uma lista de listas. percorre cada lista na lista de listas
-        #     for i in range(len(self.dict_class[key])):       #cada chave tem a ela associada uma lista de listas. percorre cada lista na lista de listas
-        #         soma = 0                                        #reseta a soma
-        #         for l in self.dict_class[key]:                  #percorre cada lista na lista de listas
-        #             soma += l[i]                                #vai somando os valores
-        #         self.dict_centroides[key].append(soma / len(self.dict_class[key])) #a coordenada x do centroide eh a media de todas as outras coordenadas x
-
-
         self.dict_centroides = {}
 
         for key, vetores in self.dict_class.items():
@@ -43,13 +31,17 @@ class NearestCentroidClassifier(ClassifierInterface):
 
     def predict(self, test_dataset: DatasetInterface) -> List[str]:
         """ para cada amostra no dataset, buscar o centroide mais proximo e respectiva retornar a classe """
+        classes_preditas = []
+
         for i in range (test_dataset.size()):
             vetor_teste, _ = test_dataset.get(i)                     #pego cada vetor de teste
             menor_distancia = float("inf")                           #comeco com uma distancia grande, a ideia eh substituir aqui a menor distancia
             for j in self.dict_centroides.keys():                    #percorro os centroides
                 distancia=dist(vetor_teste, self.dict_centroides[j]) #calculo a distanca do vetor pro centroide
                 if distancia < menor_distancia:                      #se a distancia for a menor que as analisadas anteriormente
-                    indice = j                                       #salvo o indice
+                    classe = j                                       #salvo o indice
                     menor_distancia = distancia                      #salvo a menor distancia
-        return [indice]                                              #retorno o indice
+            classes_preditas.append(classe)
+        
+        return classes_preditas                                      #retorno a lista de classes preditas
 
