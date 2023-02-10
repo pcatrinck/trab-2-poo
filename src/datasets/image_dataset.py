@@ -9,7 +9,7 @@ class ImageDataset(DatasetInterface):
         super().__init__(path)
         # ler arquivo contendo os nomes das imagens e as classes e armazenar
         # em uma lista
-        path = 'data/datasets/img_small/test.txt'
+        path = 'data/datasets/img_medium/test.txt'
         self.path = path
         self.images = []
         #self.lista_sumario = []

@@ -21,6 +21,11 @@ class Experiment:
         metrics = {
             "accuracy": accuracy(self.true_classes, pred_classes)
         }
+        print("true classes:")
+        print(self.true_classes)
+        print("pred_classes:")
+        print(pred_classes)
+        print("metrics:")
         print(metrics)
         return metrics
 
